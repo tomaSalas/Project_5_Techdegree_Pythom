@@ -17,7 +17,7 @@ def approve(s):
 
 class Entry(Model):
     """Create de model for the entries"""
-    
+
     title = CharField(max_length=100)
     slug = CharField(unique=True)
     date = DateTimeField(default=datetime.datetime.now)
@@ -25,13 +25,10 @@ class Entry(Model):
     learned = TextField()
     resources = TextField()
     tags = CharField(max_length=200)
-    
 
     def save(self, *args, **kwargs):
         self.slug = approve(self.title) + "-" + str(random.randint(1, 100))
         super(Entry, self).save(*args, **kwargs)
-        
-
 
     class Meta:
         database = DATABASE

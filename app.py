@@ -65,7 +65,8 @@ def login():
                 flash("Welcome!", "success")
                 return redirect(nextt or url_for('list_entries'))
             else:
-                flash("Ups, we didn't find any matches with that password or email!", "error")
+                flash(
+                    "Ups, we didn't find any matches with that password or email!", "error")
     return render_template('login.html', form=form)
 
 
@@ -100,7 +101,7 @@ def add_entry():
 def list_entries(tag=None):
     if tag:
         list = models.Entry.select().where(
-                models.Entry.tags.contains(tag))
+            models.Entry.tags.contains(tag))
         if list.count() == 0:
             abort(404)
     else:
@@ -162,6 +163,7 @@ def delete_entry(slug):
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
+
 
 if __name__ == "__main__":
     models.initialize()

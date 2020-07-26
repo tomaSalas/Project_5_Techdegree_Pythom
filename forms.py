@@ -82,7 +82,7 @@ class edit_entry(Form):
         ]
     )
     tags = StringField(
-       "'Tags (separate with a spaces)",
+        "'Tags (separate with a spaces)",
     )
 
 
