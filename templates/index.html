@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="entry-list">
+        {% for entry in list %}
+        <article>
+            <h2><a href="{{ url_for('show_details', slug=entry.slug) }}
+            ">{{ entry.title }}</a></h2>
+            <time datetime="2016-01-31">{{ entry.date.strftime('%B %-d, %Y') }}</time>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

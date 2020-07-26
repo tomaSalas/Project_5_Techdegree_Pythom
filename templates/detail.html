@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="entry-list single">
+        <article>
+            <h1>{{ entry.title }}</h1>
+            <time datetime="2016-01-31">{{ entry.date.strftime('%B %-d, %Y') }}</time>
+            <div class="entry">
+                <h3>Time Spent: </h3>
+                <p>{{ entry.time_spent }}</p>
+            </div>
+            <div class="entry">
+                <h3>What I Learned:</h3>
+                <p>{{ entry.learned }}</p>
+            </div>
+            <div class="entry">
+                <h3>Resources to Remember:</h3>
+                <ul>
+                {% for resource in resources %}
+                    <li><a href="{{ resource.strip(' \t\n\r')[resource.find('http'):] }}" target="_blank">{{ resource.strip(' \t\n\r')[:resource.find('http')] }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="entry">
+                <h3>Tags</h3>
+                <p>
+                {% for tag in tags %}
+                    <span class="tag"><a href="{{ url_for('list_entries', tag=tag) }}">{{ tag }}</a></span> 
+                {% endfor %}
+                </p>
+            </div>
+        </article>
+    </div>
+</div>
+<div class="edit">
+    <p><a href="{{ url_for('edit_entry', slug=entry.slug) }}">Edit Entry</a></p>
+    <p><a href="{{ url_for('delete_entry', slug=entry.slug) }}">Delete Entry</a></p>
+</div>
+{% endblock %}    
