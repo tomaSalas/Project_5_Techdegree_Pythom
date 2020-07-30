@@ -52,6 +52,7 @@ def after_request(response):
 
 @app.route("/login", methods=('GET', 'POST'))
 def login():
+    """Login if user existis"""
     form = forms.LoginForm()
     nextt = request.args.get("next")
     if form.validate_on_submit():
@@ -72,6 +73,7 @@ def login():
 
 @app.route("/logout")
 def logout():
+    """end session"""
     logout_user()
     flash("See you soon, Bye Bye!",  "success")
     return redirect(url_for('list_entries'))
@@ -80,6 +82,7 @@ def logout():
 @app.route("/new", methods=('GET', 'POST'))
 @login_required
 def add_entry():
+    """add entry to database"""
     form = forms.new_entry()
     if form.validate_on_submit():
         models.Entry.create(
@@ -99,6 +102,7 @@ def add_entry():
 @app.route("/entries")
 @app.route("/entries/<tag>")
 def list_entries(tag=None):
+    """use the tags to get a list of entries with the same tags"""
     if tag:
         list = models.Entry.select().where(
             models.Entry.tags.contains(tag))
@@ -106,11 +110,12 @@ def list_entries(tag=None):
             abort(404)
     else:
         list = models.Entry.select()
-    return render_template('index.html', list=list)
+    return render_template("index.html", list=list)
 
 
 @app.route("/details/<slug>")
 def show_details(slug):
+    """Show all the data store in the entry"""
     try:
         entry = models.Entry.get(slug=slug)
     except models.DoesNotExist:
@@ -123,6 +128,7 @@ def show_details(slug):
 @app.route("/entries/edit/<slug>", methods=("GET", "POST"))
 @login_required
 def edit_entry(slug):
+    """edit the data store in the entry"""
     try:
         entry = models.Entry.get(models.Entry.slug == slug)
     except models.DoesNotExist:
@@ -150,6 +156,7 @@ def edit_entry(slug):
 @app.route("/entries/delete/<slug>")
 @login_required
 def delete_entry(slug):
+    """delete a entry"""
     try:
         entry = models.Entry.get(slug=slug)
     except models.DoesNotExist:
@@ -162,6 +169,7 @@ def delete_entry(slug):
 
 @app.errorhandler(404)
 def not_found(error):
+    """if view does not exists"""
     return render_template('404.html'), 404
 
 

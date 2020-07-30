@@ -1,3 +1,4 @@
+{% extends "layout.html" %}
 {% from 'macros.html' import render_field %}
 
 {% block content %}
@@ -11,7 +12,7 @@
                     {{ render_field(field) }}
                 {% endfor %}
                 <input type="submit" value="Publish Entry" class="button">
-                <a href="{{ url_for('list_entries') }}" class="button button-secondary">Cancel</a>
+                <a href="{{ url_for("list_entries") }}" class="button button-secondary">Cancel</a>
             </form>
         </form>
     </div>

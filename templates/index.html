@@ -7,9 +7,13 @@
         <article>
             <h2><a href="{{ url_for('show_details', slug=entry.slug) }}
             ">{{ entry.title }}</a></h2>
-            <time datetime="2016-01-31">{{ entry.date.strftime('%B %-d, %Y') }}</time>
+            <time datetime="2020-01-01">{{ entry.date.strftime('%B %-d, %Y') }}</time>
+                <p>
+                    <span class="tag"><a href="{{ url_for("list_entries", tag=entry.tags) }}">{{ entry.tags }}</a></span>
+                </p>
         </article>
         {% endfor %}
+
     </div>
 </div>
 {% endblock %}
