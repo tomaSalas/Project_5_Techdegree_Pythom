@@ -3,7 +3,7 @@ argon2-cffi==16.0.0
 cffi==1.13.2
 coverage==4.0.3
 cycler==0.10.0
-Django==1.9.9
+Django==1.11.29
 django-bootstrap3==7.0.1
 django-braces==1.9.0
 django-debug-toolbar==1.5
